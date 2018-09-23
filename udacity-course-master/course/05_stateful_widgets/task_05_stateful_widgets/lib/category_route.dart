@@ -16,7 +16,6 @@ final _backgroundColor = Colors.green[100];
 ///
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
-// TODO: Make CategoryRoute a StatefulWidget
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
@@ -27,6 +26,7 @@ class CategoryRoute extends StatefulWidget {
 class _CategoryRouteState extends State<CategoryRoute> {
   final categories = <Category>[];
   Container listView;
+  AppBar appBar;
 
   static const _categoryNames = <String>[
     'Length',
@@ -75,7 +75,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
   
   @override
   void initState() {
-    // TODO: implement initState
 
 
     for (var i = 0; i < _categoryNames.length; i++) {
@@ -94,11 +93,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     );
 
     super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    final appBar = AppBar(
+    appBar = AppBar(
       elevation: 0.0,
       title: Text(
         'Unit Converter',
@@ -110,6 +106,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
       centerTitle: true,
       backgroundColor: _backgroundColor,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
 
     return Scaffold(
       appBar: appBar,

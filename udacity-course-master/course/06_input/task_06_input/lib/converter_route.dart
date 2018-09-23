@@ -38,8 +38,8 @@ class ConverterRoute extends StatefulWidget {
 }
 
 class _ConverterRouteState extends State<ConverterRoute> {
-  // TODO: Set some variables, such as for keeping track of the user's input
   // value and units
+  String _inputValue, _inputUnit;
 
   // TODO: Determine whether you need to override anything, such as initState()
 
@@ -62,10 +62,30 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // TODO: Create the 'input' group of widgets. This is a Column that
     // includes the output value, and 'from' unit [Dropdown].
 
+    final input = TextField(
+      style: Theme.of(context).textTheme.headline,
+      decoration: InputDecoration(border: OutlineInputBorder()),
+      onChanged: (String value) => _inputValue = value,
+    );
+
+    final dropdown = DropdownButton(
+      items: widget.units.map((Unit unit) {
+        return DropdownMenuItem(
+          child: Text(unit.name),
+        );
+      }).toList(),
+      onChanged: (value) {},
+    );
     // TODO: Create a compare arrows icon.
 
     // TODO: Create the 'output' group of widgets. This is a Column that
@@ -73,28 +93,18 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // TODO: Return the input, arrows, and output widgets, wrapped in
 
     // TODO: Delete the below placeholder code
-    final unitWidgets = widget.units.map((Unit unit) {
-      return Container(
-        color: widget.color,
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              unit.name,
-              style: Theme.of(context).textTheme.headline,
-            ),
-            Text(
-              'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ],
-        ),
-      );
-    }).toList();
 
-    return ListView(
-      children: unitWidgets,
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 100.0,
+          color: widget.color,
+          child: Column(
+            children: <Widget>[input, dropdown],
+          ),
+        ),
+      ),
     );
   }
 }
