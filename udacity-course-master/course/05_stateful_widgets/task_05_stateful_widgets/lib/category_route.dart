@@ -26,6 +26,7 @@ class CategoryRoute extends StatefulWidget {
 
 class _CategoryRouteState extends State<CategoryRoute> {
   final categories = <Category>[];
+  Container listView;
 
   static const _categoryNames = <String>[
     'Length',
@@ -49,6 +50,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.red,
   ];
 
+
+
   /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
     return List.generate(10, (int i) {
@@ -69,15 +72,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
       itemCount: categories.length,
     );
   }
-
+  
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
+
     for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(Category(
         name: _categoryNames[i],
@@ -87,12 +87,17 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ));
     }
 
-    final listView = Container(
+    listView = Container(
       color: _backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(categories),
     );
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final appBar = AppBar(
       elevation: 0.0,
       title: Text(
